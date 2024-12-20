@@ -1,0 +1,4 @@
+.env
+ipca.db
+__pycache__/
+venv
