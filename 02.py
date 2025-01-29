@@ -8,9 +8,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-os.environ['OPENAI_API_KEY'] = os.getenv('API_KEY')
-
-model = ChatOpenAI(model='gpt-3.5-turbo')
+model = ChatOpenAI(model='gpt-3.5-turbo', api_key=os.getenv('API_KEY'))
 
 wikipedia_tool = WikipediaQueryRun(
     api_wrapper=WikipediaAPIWrapper(
