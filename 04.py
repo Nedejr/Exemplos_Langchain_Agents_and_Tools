@@ -1,11 +1,14 @@
+# Criando agente assistente financeiro reativo
+
 import os
+from dotenv import load_dotenv
 from langchain import hub
 from langchain.agents import Tool, create_react_agent, AgentExecutor
-from langchain.prompts import PromptTemplate
 from langchain_community.tools import DuckDuckGoSearchRun
 from langchain_experimental.utilities import PythonREPL
 from langchain_openai import ChatOpenAI
-from dotenv import load_dotenv
+from langchain.prompts import PromptTemplate
+
 
 load_dotenv()
 
@@ -19,6 +22,7 @@ Responda tudo em português brasileiro.
 Perguntas: {q}
 '''
 prompt_template = PromptTemplate.from_template(prompt)
+
 
 python_repl = PythonREPL()
 python_repl_tool = Tool(
@@ -38,6 +42,7 @@ duckduckgo_tool = Tool(
     func=search.run,
 )
 
+
 react_instructions = hub.pull('hwchase17/react')
 
 tools = [python_repl_tool, duckduckgo_tool]
@@ -55,8 +60,7 @@ agent_executor = AgentExecutor(
 )
 
 question = ''''
-Minha renda é de R$10000 por mês, tenho muitos cartões de crédito no total de R$12000 por mês.
-Tenho mais despesa de aluguel e combustível de R$1500.
+Minha renda é de R$2400 por mês, tenho muitos cartões de crédito no total de R$2500 por mês.
 Quais dicas você me dá?
 '''
 

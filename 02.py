@@ -1,14 +1,19 @@
+# Criando um agente com Search Tool
+
 import os
-from langchain.prompts import PromptTemplate
+from dotenv import load_dotenv
 from langchain_community.tools import WikipediaQueryRun
 from langchain_community.utilities import WikipediaAPIWrapper
 from langchain_experimental.agents.agent_toolkits import create_python_agent
 from langchain_openai import ChatOpenAI
-from dotenv import load_dotenv
+from langchain.prompts import PromptTemplate
+
 
 load_dotenv()
 
-model = ChatOpenAI(model='gpt-3.5-turbo', api_key=os.getenv('API_KEY'))
+os.environ['OPENAI_API_KEY'] = os.getenv('API_KEY')
+
+model = ChatOpenAI(model='gpt-3.5-turbo')
 
 wikipedia_tool = WikipediaQueryRun(
     api_wrapper=WikipediaAPIWrapper(
@@ -30,7 +35,7 @@ prompt_template = PromptTemplate(
     '''
 )
 
-query = 'Alan Turing'
+query = 'Geddy Lee'
 prompt = prompt_template.format(query=query)
 
 response = agent_executor.invoke(prompt)

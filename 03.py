@@ -1,10 +1,12 @@
+# Criando um agente com Python REPL
+
 import os
+from dotenv import load_dotenv
 from langchain.agents import Tool
-from langchain.prompts import PromptTemplate
 from langchain_experimental.utilities import PythonREPL
 from langchain_experimental.agents.agent_toolkits import create_python_agent
 from langchain_openai import ChatOpenAI
-from dotenv import load_dotenv
+from langchain.prompts import PromptTemplate
 
 load_dotenv()
 
@@ -33,7 +35,7 @@ prompt_template = PromptTemplate(
     '''
 )
 
-query = r'quanto é 20% de 3000'
+query = r'Calcule 20 vezes 33'
 prompt = prompt_template.format(query=query)
 
 response = agent_executor.invoke(prompt)
